@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Spin the Wheel</title>
+<style>
+
+:root{
+  --text: #fff;
+  --surface: 255, 255, 255, .06;
+  --stroke: 255, 255, 255, .12;
+  --maxw: 1600px;
+}
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background: url(Images/testing.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    }
+
+        /*------ Nav Bar ------*/
+
+.nav{
+  position: sticky;
+  top: 0;
+  background: linear-gradient(180deg, rgba(8, 10, 14, 0.55), rgba(8, 10, 14, 0.35));
+  padding: clamp(0.5rem, 1vw + 0.2rem, 1rem);
+  border-bottom: 1px solid var(--stroke);
+  backdrop-filter: blur(12px);
+  z-index: 100;
+}
+
+.nav-inner{
+  max-width: var(--maxw);
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text);
+  text-decoration: none;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 700;
+}
+
+.logo-img{
+  width: clamp(120px, 4vw, 144px);
+
+}
+
+.menu{
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 1vw, 1.5rem);
+  list-style: none;
+}
+
+.menu a{
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  font-weight: 500;
+  color: var(--text);
+  transition: 0.2s;
+}
+
+.menu a:hover{
+  text-shadow: 0 0 10px var(--text);
+}
+
+.menu a span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.menu li {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: black;
+  border: 1px solid var(--stroke);
+  border-radius: 10px;
+  padding: 0.5rem 0;
+  list-style: none;
+  display: none;
+  min-width: 200px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  z-index: 999;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+.dropdown-menu li a:hover {
+  background: rgba(68, 68, 68, 0.3);
+}
+
+.menu li:hover .dropdown-menu {
+  display: block;
+}
+
+.search{
+  position: relative;
+}
+
+.search input{
+  width: 100%;
+  padding: 0.6rem 2.5rem 0.6rem 0.75rem;
+  font-size: 0.8rem;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--stroke);
+  border-radius: 12px;
+  outline: none;
+  box-shadow: 0 2px 9px -2px rgba(255, 255, 255, 0.55);
+}
+
+.search input::placeholder{
+  color: #b6c0c9;
+}
+
+.search button{
+  position: absolute;
+  right: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  font-size: 1rem;
+  align-items: center;
+}
+
+.search svg{
+  width: clamp(18px, 2vw, 24px);
+  height: clamp(18px, 2vw, 24px);
+  opacity: 0.8;
+}
+
+.nav-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--text);
+  border: none;
+  outline: none;
+  border-radius: 12px;
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+
+.nav-btn .btn{
+  padding: 0.6rem 1rem;
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 700;
+  color: #111;
+  cursor: pointer;
+  text-decoration: none;
+}
+.nav-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px -8px rgba(255, 255, 255, 0.55);
+}
+
+
+/*-------WHeeel Code-------*/
+
+    h1 {
+        color: #fff;
+        margin-top: 20px;
+    }
+
+    #wheel {
+        margin: 30px auto;
+        border-radius: 50%;
+        border: 8px solid #333;
+    }
+
+    canvas {
+        border-radius: 50%;
+    }
+
+    #pointer {
+    position: absolute;
+    top: 50%;
+    right: -50px; /* matches the wheel border thickness */
+    transform: translateY(-50%) rotate(-90deg);
+
+    width: 0;
+    height: 0;
+
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 40px solid red;
+}
+
+    input {
+        padding: 10px;
+        margin: 5px;
+        width: 200px;
+    }
+
+    .wheel-button {
+        padding: 10px 15px;
+        margin: 5px;
+        cursor: pointer;
+        border: none;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0,37);
+        color: white;
+        border-radius: 5px;
+    }
+
+    .wheel-button:hover{
+        background: #0056b3;
+    }
+
+    /* POPUP */
+    #popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #popupContent {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+        animation: pop 0.4s ease;
+    }
+
+    @keyframes pop {
+        from { transform: scale(0.5); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    #popupWinner {
+        font-size: 28px;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    #closePopup {
+        background: red;
+    }
+</style>
+</head>
+<body>
+
+      <!---Nav Bar-->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="" class="brand">
+        <img src="Images/image-1765291667825.png" alt="logo" class="logo-img">
+        <span></span>
+      </a>
+  
+      <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#"><span>Menu<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m12 15l5-5H7z"/></svg></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="create-profile.html">Create Client Profile</a></li>
+            <li><a href="FA-awards-templates.html">FA Awards Templates</a></li>
+            <li><a href="spinning-wheel.html">Spinning Wheel For Prizes</a></li>
+            <li><a href="cover-letter.html">Cover Letter</a></li>
+          </ul>
+        </li>
+  
+        <form action="" class="search">
+          <input type="search" placeholder="Search..." required>
+          <button type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14"/></svg>
+          </button>
+        </form>
+  
+        <button class="nav-btn">
+          <a href="" class="btn">Luciano S</a>
+        </button>
+      </ul>
+  
+    </div>
+  </header>
+
+<h1>Spin the Wheel</h1>
+
+<div>
+    <input type="text" id="nameInput" placeholder="Enter name">
+    <button class="wheel-button" onclick="addName()">Add</button>
+</div>
+
+<div style="position: relative; display: inline-block;">
+    <canvas id="wheel" width="400" height="400"></canvas>
+    <div id="pointer"></div>
+</div>
+
+<div>
+    <button class="wheel-button"  onclick="spin()">SPIN</button>
+</div>
+
+
+
+<!-- POPUP -->
+<div id="popup">
+    <div id="popupContent">
+        <div id="popupWinner"></div>
+        <button id="closePopup" onclick="closePopup()">Close</button>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+    const canvas = document.getElementById("wheel");
+    const ctx = canvas.getContext("2d");
+
+    let names = [];
+    let angle = 0;
+    let spinning = false;
+
+    function addName() {
+        const input = document.getElementById("nameInput");
+        if (input.value.trim() !== "") {
+            names.push(input.value.trim());
+            input.value = "";
+            drawWheel();
+        }
+    }
+
+    function drawWheel() {
+        const radius = canvas.width / 2;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        if (names.length === 0) return;
+
+        const arc = (2 * Math.PI) / names.length;
+
+        names.forEach((name, i) => {
+            const start = i * arc;
+            const end = start + arc;
+
+            ctx.beginPath();
+            ctx.moveTo(radius, radius);
+            ctx.arc(radius, radius, radius, start, end);
+            ctx.fillStyle = `hsl(${i * 360 / names.length}, 70%, 60%)`;
+            ctx.fill();
+
+            ctx.save();
+            ctx.translate(radius, radius);
+            ctx.rotate(start + arc / 2);
+            ctx.textAlign = "right";
+            ctx.fillStyle = "#000";
+            ctx.font = "16px Arial";
+            ctx.fillText(name, radius - 10, 5);
+            ctx.restore();
+        });
+    }
+
+    function spin() {
+        if (spinning || names.length === 0) return;
+
+        spinning = true;
+        const spinAngle = Math.random() * 3000 + 2000;
+        const duration = 4000;
+        const start = performance.now();
+
+        function animate(time) {
+            const elapsed = time - start;
+            const progress = Math.min(elapsed / duration, 1);
+
+            angle = spinAngle * easeOut(progress);
+            canvas.style.transform = `rotate(${angle}deg)`;
+
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                spinning = false;
+                showWinner();
+            }
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    function easeOut(t) {
+        return 1 - Math.pow(1 - t, 3);
+    }
+
+    function showWinner() {
+        const degrees = angle % 360;
+        const slice = 360 / names.length;
+        const index = Math.floor((360 - degrees) / slice) % names.length;
+
+        const winner = names[index];
+
+        // Show popup
+        document.getElementById("popupWinner").innerText = "🎉 " + winner + " Wins!";
+        document.getElementById("popup").style.display = "flex";
+
+        // Confetti 🎊
+        confetti({
+            particleCount: 250,
+            spread: 120,
+            origin: { y: 0.6 }
+        });
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    drawWheel();
+</script>
+
+</body>
+</html>
