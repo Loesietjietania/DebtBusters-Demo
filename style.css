@@ -848,3 +848,47 @@ hr{
   display: block;
   border-radius: 8px;
 }
+
+/*--------------Image COde------------*/
+
+.box{
+  background: url(Images/WhatsApp\ Image\ 2026-04-13\ at\ 19.31.13.jpeg) no-repeat;
+  background-size: cover;
+    background-position: center;
+margin: 50px;
+max-width: 17em;
+aspect-ratio: 1/1;
+
+  border-radius: 10px;
+  position: relative;
+
+}
+
+@property --deg{
+  syntax: '<angle>';
+  inherits: true;
+  initial-value: 0deg;
+}
+
+.box::before,
+.box::after{
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: conic-gradient(from var(--deg) at center, #00c3ff, #4d0199, #6300c6, #009dcd);
+  border-radius: inherit;
+  z-index: -2;
+  padding: 2px;
+  animation: autoRotate 2s linear infinite;
+}
+
+.box::after{
+  filter: blur(10px);
+}
+
+@keyframes autoRotate{
+  to{
+    --deg: 360deg;
+  }
+}
