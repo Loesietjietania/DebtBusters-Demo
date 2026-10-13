@@ -1,0 +1,2868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Debt Busters Soccer Tournament Manager</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+
+
+        body {
+            background: url(Images/testing.png) no-repeat;
+  background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #ffffff;
+        }
+
+            /*------ Nav Bar ------*/
+
+.nav{
+  position: sticky;
+  top: 0;
+  background: linear-gradient(180deg, rgba(8, 10, 14, 0.55), rgba(8, 10, 14, 0.35));
+  padding: clamp(0.5rem, 1vw + 0.2rem, 1rem);
+  border-bottom: 1px solid var(--stroke);
+  backdrop-filter: blur(12px);
+  z-index: 100;
+}
+
+.nav-inner{
+  max-width: var(--maxw);
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text);
+  text-decoration: none;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 700;
+}
+
+.logo-img{
+  width: clamp(120px, 4vw, 144px);
+
+}
+
+.menu{
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 1vw, 1.5rem);
+  list-style: none;
+}
+
+.menu a{
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  font-weight: 500;
+  color: var(--text);
+  transition: 0.2s;
+}
+
+.menu a:hover{
+  text-shadow: 0 0 10px var(--text);
+}
+
+.menu a span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.menu li {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: black;
+  border: 1px solid var(--stroke);
+  border-radius: 10px;
+  padding: 0.5rem 0;
+  list-style: none;
+  display: none;
+  min-width: 200px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  z-index: 999;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+.dropdown-menu li a:hover {
+  background: rgba(68, 68, 68, 0.3);
+}
+
+.menu li:hover .dropdown-menu {
+  display: block;
+}
+
+.search{
+  position: relative;
+}
+
+.search input{
+  width: 100%;
+  padding: 0.6rem 2.5rem 0.6rem 0.75rem;
+  font-size: 0.8rem;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--stroke);
+  border-radius: 12px;
+  outline: none;
+  box-shadow: 0 2px 9px -2px rgba(255, 255, 255, 0.55);
+}
+
+.search input::placeholder{
+  color: #b6c0c9;
+}
+
+.search button{
+  position: absolute;
+  right: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  font-size: 1rem;
+  align-items: center;
+}
+
+.search svg{
+  width: clamp(18px, 2vw, 24px);
+  height: clamp(18px, 2vw, 24px);
+  opacity: 0.8;
+}
+
+.nav-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--text);
+  border: none;
+  outline: none;
+  border-radius: 12px;
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+
+.nav-btn .btn{
+  padding: 0.6rem 1rem;
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 700;
+  color: #111;
+  cursor: pointer;
+  text-decoration: none;
+}
+.nav-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px -8px rgba(255, 255, 255, 0.55);
+}
+
+
+
+        .header {
+            background: linear-gradient(135deg, #075e3c, #0b8f5a);
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0 0 8px;
+            font-size: 34px;
+        }
+
+        .header p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .container {
+            width: min(1400px, 95%);
+            margin: 30px auto;
+        }
+
+        .section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+border-radius: 20px;
+border: 1px solid rgba(255, 255, 255, 0.18);
+box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0,37);
+
+
+    /* background: #151f32;
+    border-radius: 14px;
+    */
+            padding: 24px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .section h2 {
+            margin-top: 0;
+            color: #35d892;
+        }
+
+        /* =========================
+           SAVE STATUS
+        ========================= */
+
+        .save-status {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: #123d2e;
+            color: #64f2ad;
+            padding: 9px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            z-index: 999;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* =========================
+           CONTROLS
+        ========================= */
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            border: none;
+            border-radius: 8px;
+            padding: 11px 18px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .primary {
+            background: #18a86b;
+            color: white;
+        }
+
+        .secondary {
+            background: #26364f;
+            color: white;
+        }
+
+        .danger {
+            background: #c0392b;
+            color: white;
+        }
+
+        .gold {
+            background: #e5a72f;
+            color: #111;
+        }
+
+        .blue {
+            background: #287bc7;
+            color: white;
+        }
+
+        /* =========================
+           TEAM SETUP
+        ========================= */
+
+        .team-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 11px;
+            border-radius: 7px;
+            border: 1px solid #34445f;
+            background: #0e1727;
+            color: white;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #21c982;
+        }
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+
+        th {
+            background: #0c1525;
+            color: #9baec9;
+            padding: 13px 10px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        td {
+            padding: 13px 10px;
+            text-align: center;
+            border-bottom: 1px solid #26344b;
+        }
+
+        td:nth-child(2) {
+            text-align: left;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background: #1b2940;
+        }
+
+        .position {
+            width: 45px;
+            font-weight: bold;
+        }
+
+        .points {
+            color: #39df91;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .qualified {
+            background: rgba(24, 168, 107, 0.08);
+        }
+
+        .eliminated {
+            background: rgba(192, 57, 43, 0.13);
+            color: #ff7770;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .badge-qualified {
+            background: #155c42;
+            color: #6effb8;
+        }
+
+        .badge-eliminated {
+            background: #602c29;
+            color: #ff817a;
+        }
+
+        /* =========================
+           MATCH ENTRY
+        ========================= */
+
+        .match-form {
+            display: grid;
+            grid-template-columns: 1fr 100px 100px 1fr auto;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .score-input {
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .matches-list {
+            margin-top: 20px;
+        }
+
+        .match-item {
+            display: grid;
+            grid-template-columns: 1fr 70px 1fr 80px;
+            align-items: center;
+            gap: 10px;
+            padding: 13px;
+            border-bottom: 1px solid #29374d;
+        }
+
+        .match-team {
+            font-weight: bold;
+        }
+
+        .match-team.right {
+            text-align: right;
+        }
+
+        .score {
+            text-align: center;
+            font-size: 17px;
+            font-weight: bold;
+            color: #39df91;
+        }
+
+        /* =========================
+           KNOCKOUT
+        ========================= */
+
+        .knockout-intro {
+            color: #a9b8ce;
+            margin-bottom: 20px;
+        }
+
+        .bracket {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            overflow-x: auto;
+            padding-bottom: 20px;
+        }
+
+        .round {
+            min-width: 280px;
+        }
+
+        .round-title {
+            text-align: center;
+            color: #35d892;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .round-matches {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            height: 600px;
+        }
+
+        .knockout-match {
+            background: #0e1727;
+            border: 1px solid #2c3d58;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .knockout-match.final {
+            border-color: #e5a72f;
+        }
+
+        .knockout-team {
+            padding: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #29374d;
+        }
+
+        .knockout-team:last-child {
+            border-bottom: none;
+        }
+
+        .knockout-team.winner {
+            background: rgba(24, 168, 107, 0.2);
+            color: #4df5a0;
+            font-weight: bold;
+        }
+
+        .knockout-team.loser {
+            opacity: 0.45;
+        }
+
+        .knockout-team button {
+            padding: 5px 8px;
+            font-size: 11px;
+            background: #18a86b;
+            color: white;
+        }
+
+        .empty-team {
+            color: #61728c;
+            font-style: italic;
+        }
+
+        /* =========================
+           CHAMPION
+        ========================= */
+
+        .champion {
+            text-align: center;
+            padding: 35px 20px;
+            background: linear-gradient(
+                135deg,
+                rgba(229, 167, 47, 0.15),
+                rgba(24, 168, 107, 0.15)
+            );
+            border: 1px solid #e5a72f;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        .champion .trophy {
+            font-size: 65px;
+        }
+
+        .champion h2 {
+            color: #ffd76a;
+            margin: 10px 0;
+        }
+
+        .champion-name {
+            font-size: 30px;
+            font-weight: bold;
+            color: white;
+        }
+
+        /* =========================
+           INFO
+        ========================= */
+
+        .info-box {
+            background: #0d1829;
+            border-left: 4px solid #18a86b;
+            padding: 15px;
+            border-radius: 6px;
+            color: #b7c5d9;
+            margin-bottom: 20px;
+        }
+
+        .status {
+            color: #35d892;
+            font-weight: bold;
+        }
+
+        .backup-box {
+            background: #0e1727;
+            border: 1px solid #263b56;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .backup-box p {
+            color: #9eafc6;
+            margin-top: 0;
+        }
+
+        @media (max-width: 800px) {
+
+            .match-form {
+                grid-template-columns: 1fr 80px 80px 1fr;
+            }
+
+            .match-form button {
+                grid-column: 1 / -1;
+            }
+
+            .bracket {
+                grid-template-columns: repeat(3, 280px);
+            }
+
+            header h1 {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="save-status" id="saveStatus">
+    💾 Saved
+</div>
+
+
+      <!---Nav Bar-->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="" class="brand">
+        <img src="Images/image-1765291667825.png" alt="logo" class="logo-img">
+        <span></span>
+      </a>
+  
+      <ul class="menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#"><span>Menu<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m12 15l5-5H7z"/></svg></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="create-profile.html">Create Client Profile</a></li>
+            <li><a href="FA-awards-templates.html">FA Awards Templates</a></li>
+            <li><a href="spinning-wheel.html">Spinning Wheel For Prizes</a></li>
+            <!--
+            <li><a href="cover-letter.html">Cover Letter</a></li>
+            -->
+            <li><a href="dls-stats-db.html">DLS STATS</a></li>
+          </ul>
+        </li>
+  
+        <form action="" class="search">
+          <input type="search" placeholder="Search..." required>
+          <button type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14"/></svg>
+          </button>
+        </form>
+  
+        <button class="nav-btn">
+          <a href="" class="btn">Luciano S</a>
+        </button>
+      </ul>
+  
+    </div>
+  </header>
+<div class="header">
+    <h1>🏆 Debt Busters Soccer Tournament Manager</h1>
+    <p>9-Team Group Stage → Quarter-Finals → Semi-Finals → Final</p>
+</div>
+
+<div class="container">
+
+    <!-- =========================
+         TEAM SETUP
+    ========================== -->
+
+    <section class="section">
+
+        <h2>⚽ Team Setup</h2>
+
+        <div class="info-box">
+            Enter the names of your 9 teams.
+            Your tournament is automatically saved in this browser.
+        </div>
+
+        <div class="team-inputs" id="teamInputs"></div>
+
+        <br>
+
+        <div class="controls">
+
+            <button class="primary" onclick="saveTeams()">
+                Save Team Names
+            </button>
+
+            <button class="secondary" onclick="resetTournament()">
+                🔄 Reset Tournament
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         GROUP STAGE
+    ========================== -->
+
+    <section class="section">
+
+        <h2>📊 Group Stage</h2>
+
+        <div class="info-box">
+
+            <strong>Scoring:</strong>
+
+            Win = 3 points &nbsp; | &nbsp;
+            Draw = 1 point &nbsp; | &nbsp;
+            Loss = 0 points
+
+            <br><br>
+
+            Ranking order:
+
+            <strong>
+                Points → Goal Difference → Goals Scored → Wins
+            </strong>
+
+        </div>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>#</th>
+                        <th>Team</th>
+                        <th>P</th>
+                        <th>W</th>
+                        <th>D</th>
+                        <th>L</th>
+                        <th>GF</th>
+                        <th>GA</th>
+                        <th>GD</th>
+                        <th>Pts</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="standingsBody"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         GROUP MATCH
+    ========================== -->
+
+    <section class="section">
+
+        <h2>➕ Record Group Stage Match</h2>
+
+        <div class="match-form">
+
+            <select id="homeTeam">
+                <option value="">Home Team</option>
+            </select>
+
+            <input
+                type="number"
+                id="homeScore"
+                class="score-input"
+                min="0"
+                placeholder="0"
+            >
+
+            <input
+                type="number"
+                id="awayScore"
+                class="score-input"
+                min="0"
+                placeholder="0"
+            >
+
+            <select id="awayTeam">
+                <option value="">Away Team</option>
+            </select>
+
+            <button
+                class="primary"
+                onclick="addGroupMatch()"
+            >
+                Add Match
+            </button>
+
+        </div>
+
+        <div
+            class="matches-list"
+            id="matchesList"
+        ></div>
+
+    </section>
+
+
+    <!-- =========================
+         BACKUP
+    ========================== -->
+
+    <section class="section">
+
+        <h2>💾 Tournament Backup</h2>
+
+        <div class="backup-box">
+
+            <p>
+                Your tournament automatically saves to this browser.
+                Use Export Tournament to create a backup file.
+            </p>
+
+            <div class="controls">
+
+                <button
+                    class="blue"
+                    onclick="exportTournament()"
+                >
+                    📤 Export Tournament
+                </button>
+
+                <button
+                    class="secondary"
+                    onclick="document.getElementById('importFile').click()"
+                >
+                    📥 Import Tournament
+                </button>
+
+                <input
+                    type="file"
+                    id="importFile"
+                    accept=".json"
+                    style="display:none"
+                    onchange="importTournament(event)"
+                >
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         KNOCKOUT
+    ========================== -->
+
+    <section class="section">
+
+        <h2>🏆 Knockout Stage</h2>
+
+        <div class="info-box">
+
+            After the group stage, the team in 9th place is eliminated.
+
+            The remaining 8 teams are randomly drawn into 4 quarter-final
+            matches.
+
+            <br><br>
+
+            <strong>
+                You must select the winner of each knockout match.
+            </strong>
+
+        </div>
+
+        <div class="controls">
+
+            <button
+                class="gold"
+                onclick="startKnockout()"
+            >
+                🎲 Randomly Draw Quarter-Finals
+            </button>
+
+        </div>
+
+        <p
+            id="knockoutStatus"
+            class="status"
+        ></p>
+
+
+        <div class="bracket">
+
+            <!-- QUARTER FINALS -->
+
+            <div class="round">
+
+                <div class="round-title">
+                    Quarter-Finals
+                </div>
+
+                <div
+                    class="round-matches"
+                    id="quarterFinals"
+                ></div>
+
+            </div>
+
+
+            <!-- SEMI FINALS -->
+
+            <div class="round">
+
+                <div class="round-title">
+                    Semi-Finals
+                </div>
+
+                <div
+                    class="round-matches"
+                    id="semiFinals"
+                ></div>
+
+            </div>
+
+
+            <!-- FINAL -->
+
+            <div class="round">
+
+                <div class="round-title">
+                    🏆 Final
+                </div>
+
+                <div
+                    class="round-matches"
+                    id="finalRound"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <div id="championArea"></div>
+
+    </section>
+
+</div>
+
+
+<script>
+
+/* ============================================================
+   STORAGE
+============================================================ */
+
+const STORAGE_KEY = "soccerTournamentData_v1";
+
+
+/* ============================================================
+   DATA
+============================================================ */
+
+const TEAM_COUNT = 9;
+
+let teams = [];
+
+let groupMatches = [];
+
+let knockout = {
+
+    started: false,
+
+    quarterFinals: [],
+
+    semiFinals: [],
+
+    final: null,
+
+    champion: null
+
+};
+
+
+/* ============================================================
+   SAVE
+============================================================ */
+
+function saveToStorage() {
+
+    const data = {
+
+        teams: teams,
+
+        groupMatches: groupMatches,
+
+        knockout: knockout
+
+    };
+
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(data)
+    );
+
+
+    updateSaveStatus();
+
+}
+
+
+/* ============================================================
+   LOAD
+============================================================ */
+
+function loadFromStorage() {
+
+    const saved =
+        localStorage.getItem(STORAGE_KEY);
+
+
+    if (!saved) {
+
+        createNewTournament();
+
+        return;
+
+    }
+
+
+    try {
+
+        const data =
+            JSON.parse(saved);
+
+
+        if (
+            !data ||
+            !Array.isArray(data.teams)
+        ) {
+
+            createNewTournament();
+
+            return;
+
+        }
+
+
+        teams = data.teams;
+
+        groupMatches =
+            data.groupMatches || [];
+
+
+        knockout =
+            data.knockout || {
+
+                started: false,
+
+                quarterFinals: [],
+
+                semiFinals: [],
+
+                final: null,
+
+                champion: null
+
+            };
+
+
+    } catch (error) {
+
+        console.error(
+            "Could not load tournament:",
+            error
+        );
+
+        createNewTournament();
+
+    }
+
+}
+
+
+/* ============================================================
+   NEW TOURNAMENT
+============================================================ */
+
+function createNewTournament() {
+
+    teams = [];
+
+    for (
+        let i = 1;
+        i <= TEAM_COUNT;
+        i++
+    ) {
+
+        teams.push({
+
+            id: i,
+
+            name: "Team " + i,
+
+            played: 0,
+
+            wins: 0,
+
+            draws: 0,
+
+            losses: 0,
+
+            gf: 0,
+
+            ga: 0,
+
+            points: 0
+
+        });
+
+    }
+
+
+    groupMatches = [];
+
+
+    knockout = {
+
+        started: false,
+
+        quarterFinals: [],
+
+        semiFinals: [],
+
+        final: null,
+
+        champion: null
+
+    };
+
+}
+
+
+/* ============================================================
+   SAVE STATUS
+============================================================ */
+
+function updateSaveStatus() {
+
+    const status =
+        document.getElementById("saveStatus");
+
+
+    status.innerHTML =
+        "💾 Saved";
+
+}
+
+
+/* ============================================================
+   INITIALIZE
+============================================================ */
+
+function initialize() {
+
+    loadFromStorage();
+
+    createTeamInputs();
+
+    updateTeamSelectors();
+
+    renderStandings();
+
+    renderMatches();
+
+    renderKnockout();
+
+    updateSaveStatus();
+
+}
+
+
+/* ============================================================
+   TEAM INPUTS
+============================================================ */
+
+function createTeamInputs() {
+
+    const container =
+        document.getElementById("teamInputs");
+
+
+    container.innerHTML = "";
+
+
+    teams.forEach((team, index) => {
+
+        const input =
+            document.createElement("input");
+
+
+        input.type = "text";
+
+        input.id =
+            "teamInput" + team.id;
+
+        input.value =
+            team.name;
+
+        input.placeholder =
+            "Team " + (index + 1);
+
+
+        container.appendChild(input);
+
+    });
+
+}
+
+
+/* ============================================================
+   SAVE TEAM NAMES
+============================================================ */
+
+function saveTeams() {
+
+    if (knockout.started) {
+
+        alert(
+            "The knockout stage has already started. Team names cannot be changed now."
+        );
+
+        return;
+
+    }
+
+
+    teams.forEach(team => {
+
+        const input =
+            document.getElementById(
+                "teamInput" + team.id
+            );
+
+
+        const name =
+            input.value.trim();
+
+
+        if (name !== "") {
+
+            team.name = name;
+
+        }
+
+    });
+
+
+    saveToStorage();
+
+    updateTeamSelectors();
+
+    renderStandings();
+
+    renderMatches();
+
+    renderKnockout();
+
+
+    alert(
+        "Team names saved successfully."
+    );
+
+}
+
+
+/* ============================================================
+   TEAM SELECTORS
+============================================================ */
+
+function updateTeamSelectors() {
+
+    const home =
+        document.getElementById("homeTeam");
+
+    const away =
+        document.getElementById("awayTeam");
+
+
+    home.innerHTML =
+        '<option value="">Home Team</option>';
+
+    away.innerHTML =
+        '<option value="">Away Team</option>';
+
+
+    teams.forEach(team => {
+
+        home.innerHTML += `
+            <option value="${team.id}">
+                ${escapeHTML(team.name)}
+            </option>
+        `;
+
+
+        away.innerHTML += `
+            <option value="${team.id}">
+                ${escapeHTML(team.name)}
+            </option>
+        `;
+
+    });
+
+}
+
+
+/* ============================================================
+   ADD GROUP MATCH
+============================================================ */
+
+function addGroupMatch() {
+
+    if (knockout.started) {
+
+        alert(
+            "The knockout stage has already started. Group matches can no longer be changed."
+        );
+
+        return;
+
+    }
+
+
+    const homeId =
+        Number(
+            document.getElementById(
+                "homeTeam"
+            ).value
+        );
+
+
+    const awayId =
+        Number(
+            document.getElementById(
+                "awayTeam"
+            ).value
+        );
+
+
+    const homeScoreInput =
+        document.getElementById(
+            "homeScore"
+        );
+
+
+    const awayScoreInput =
+        document.getElementById(
+            "awayScore"
+        );
+
+
+    const homeScore =
+        Number(homeScoreInput.value);
+
+
+    const awayScore =
+        Number(awayScoreInput.value);
+
+
+    if (!homeId || !awayId) {
+
+        alert(
+            "Please select both teams."
+        );
+
+        return;
+
+    }
+
+
+    if (homeId === awayId) {
+
+        alert(
+            "A team cannot play against itself."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        homeScoreInput.value === "" ||
+        awayScoreInput.value === ""
+    ) {
+
+        alert(
+            "Please enter both scores."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        homeScore < 0 ||
+        awayScore < 0
+    ) {
+
+        alert(
+            "Scores cannot be negative."
+        );
+
+        return;
+
+    }
+
+
+    const home =
+        findTeam(homeId);
+
+    const away =
+        findTeam(awayId);
+
+
+    home.played++;
+
+    away.played++;
+
+
+    home.gf += homeScore;
+
+    home.ga += awayScore;
+
+
+    away.gf += awayScore;
+
+    away.ga += homeScore;
+
+
+    if (homeScore > awayScore) {
+
+        home.wins++;
+
+        away.losses++;
+
+        home.points += 3;
+
+    }
+
+    else if (
+        homeScore < awayScore
+    ) {
+
+        away.wins++;
+
+        home.losses++;
+
+        away.points += 3;
+
+    }
+
+    else {
+
+        home.draws++;
+
+        away.draws++;
+
+        home.points++;
+
+        away.points++;
+
+    }
+
+
+    groupMatches.push({
+
+        homeId: homeId,
+
+        awayId: awayId,
+
+        homeScore: homeScore,
+
+        awayScore: awayScore
+
+    });
+
+
+    document.getElementById(
+        "homeTeam"
+    ).value = "";
+
+
+    document.getElementById(
+        "awayTeam"
+    ).value = "";
+
+
+    homeScoreInput.value = "";
+
+    awayScoreInput.value = "";
+
+
+    saveToStorage();
+
+    renderStandings();
+
+    renderMatches();
+
+}
+
+
+/* ============================================================
+   SORT TEAMS
+============================================================ */
+
+function getSortedTeams() {
+
+    return [...teams].sort(
+        (a, b) => {
+
+            /* Points */
+
+            if (
+                b.points !== a.points
+            ) {
+
+                return (
+                    b.points -
+                    a.points
+                );
+
+            }
+
+
+            /* Goal Difference */
+
+            const gdA =
+                a.gf - a.ga;
+
+            const gdB =
+                b.gf - b.ga;
+
+
+            if (gdB !== gdA) {
+
+                return (
+                    gdB - gdA
+                );
+
+            }
+
+
+            /* Goals Scored */
+
+            if (
+                b.gf !== a.gf
+            ) {
+
+                return (
+                    b.gf -
+                    a.gf
+                );
+
+            }
+
+
+            /* Wins */
+
+            return (
+                b.wins -
+                a.wins
+            );
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   RENDER STANDINGS
+============================================================ */
+
+function renderStandings() {
+
+    const body =
+        document.getElementById(
+            "standingsBody"
+        );
+
+
+    body.innerHTML = "";
+
+
+    const sorted =
+        getSortedTeams();
+
+
+    sorted.forEach(
+        (team, index) => {
+
+            const position =
+                index + 1;
+
+
+            const gd =
+                team.gf -
+                team.ga;
+
+
+            let status;
+
+
+            if (
+                knockout.started
+            ) {
+
+                if (
+                    position <= 8
+                ) {
+
+                    status = `
+                        <span class="
+                            badge
+                            badge-qualified
+                        ">
+                            QUALIFIED
+                        </span>
+                    `;
+
+                }
+
+                else {
+
+                    status = `
+                        <span class="
+                            badge
+                            badge-eliminated
+                        ">
+                            ELIMINATED
+                        </span>
+                    `;
+
+                }
+
+            }
+
+            else {
+
+                status = `
+                    <span class="
+                        badge
+                        badge-qualified
+                    ">
+                        GROUP STAGE
+                    </span>
+                `;
+
+            }
+
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            if (
+                knockout.started &&
+                position === 9
+            ) {
+
+                row.classList.add(
+                    "eliminated"
+                );
+
+            }
+
+
+            if (
+                knockout.started &&
+                position <= 8
+            ) {
+
+                row.classList.add(
+                    "qualified"
+                );
+
+            }
+
+
+            row.innerHTML = `
+
+                <td class="position">
+                    ${position}
+                </td>
+
+                <td>
+                    ${escapeHTML(
+                        team.name
+                    )}
+                </td>
+
+                <td>
+                    ${team.played}
+                </td>
+
+                <td>
+                    ${team.wins}
+                </td>
+
+                <td>
+                    ${team.draws}
+                </td>
+
+                <td>
+                    ${team.losses}
+                </td>
+
+                <td>
+                    ${team.gf}
+                </td>
+
+                <td>
+                    ${team.ga}
+                </td>
+
+                <td>
+                    ${
+                        gd > 0
+                            ? "+"
+                            : ""
+                    }${gd}
+                </td>
+
+                <td class="points">
+                    ${team.points}
+                </td>
+
+                <td>
+                    ${status}
+                </td>
+
+            `;
+
+
+            body.appendChild(row);
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   RENDER GROUP MATCHES
+============================================================ */
+
+function renderMatches() {
+
+    const container =
+        document.getElementById(
+            "matchesList"
+        );
+
+
+    if (
+        groupMatches.length === 0
+    ) {
+
+        container.innerHTML = `
+            <div class="info-box">
+                No matches have been recorded yet.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = `
+        <h3>
+            Recorded Matches
+        </h3>
+    `;
+
+
+    groupMatches.forEach(
+        (match, index) => {
+
+            const home =
+                findTeam(
+                    match.homeId
+                );
+
+
+            const away =
+                findTeam(
+                    match.awayId
+                );
+
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "match-item";
+
+
+            item.innerHTML = `
+
+                <div class="match-team">
+                    ${escapeHTML(
+                        home.name
+                    )}
+                </div>
+
+                <div class="score">
+                    ${match.homeScore}
+                </div>
+
+                <div class="match-team right">
+                    ${escapeHTML(
+                        away.name
+                    )}
+                </div>
+
+                <button
+                    class="danger"
+                    onclick="
+                        deleteMatch(${index})
+                    "
+                >
+                    Delete
+                </button>
+
+            `;
+
+
+            container.appendChild(item);
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   DELETE MATCH
+============================================================ */
+
+function deleteMatch(index) {
+
+    if (knockout.started) {
+
+        alert(
+            "Matches cannot be deleted after the knockout stage starts."
+        );
+
+        return;
+
+    }
+
+
+    const match =
+        groupMatches[index];
+
+
+    const home =
+        findTeam(
+            match.homeId
+        );
+
+
+    const away =
+        findTeam(
+            match.awayId
+        );
+
+
+    home.played--;
+
+    away.played--;
+
+
+    home.gf -=
+        match.homeScore;
+
+    home.ga -=
+        match.awayScore;
+
+
+    away.gf -=
+        match.awayScore;
+
+    away.ga -=
+        match.homeScore;
+
+
+    if (
+        match.homeScore >
+        match.awayScore
+    ) {
+
+        home.wins--;
+
+        away.losses--;
+
+        home.points -= 3;
+
+    }
+
+    else if (
+        match.homeScore <
+        match.awayScore
+    ) {
+
+        away.wins--;
+
+        home.losses--;
+
+        away.points -= 3;
+
+    }
+
+    else {
+
+        home.draws--;
+
+        away.draws--;
+
+        home.points--;
+
+        away.points--;
+
+    }
+
+
+    groupMatches.splice(
+        index,
+        1
+    );
+
+
+    saveToStorage();
+
+    renderStandings();
+
+    renderMatches();
+
+}
+
+
+/* ============================================================
+   START KNOCKOUT
+============================================================ */
+
+function startKnockout() {
+
+    if (knockout.started) {
+
+        alert(
+            "The knockout stage has already started."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        groupMatches.length === 0
+    ) {
+
+        alert(
+            "Please record some group-stage matches first."
+        );
+
+        return;
+
+    }
+
+
+    const sorted =
+        getSortedTeams();
+
+
+    const qualified =
+        sorted.slice(0, 8);
+
+
+    shuffle(qualified);
+
+
+    knockout.started = true;
+
+
+    knockout.quarterFinals = [];
+
+
+    for (
+        let i = 0;
+        i < 8;
+        i += 2
+    ) {
+
+        knockout.quarterFinals.push({
+
+            team1:
+                qualified[i],
+
+            team2:
+                qualified[i + 1],
+
+            winner:
+                null
+
+        });
+
+    }
+
+
+    knockout.semiFinals = [
+
+        {
+            team1: null,
+            team2: null,
+            winner: null
+        },
+
+        {
+            team1: null,
+            team2: null,
+            winner: null
+        }
+
+    ];
+
+
+    knockout.final = {
+
+        team1: null,
+
+        team2: null,
+
+        winner: null
+
+    };
+
+
+    knockout.champion =
+        null;
+
+
+    document.getElementById(
+        "knockoutStatus"
+    ).innerText =
+        "Quarter-finals have been randomly drawn!";
+
+
+    saveToStorage();
+
+    renderStandings();
+
+    renderKnockout();
+
+}
+
+
+/* ============================================================
+   SHUFFLE
+============================================================ */
+
+function shuffle(array) {
+
+    for (
+        let i = array.length - 1;
+        i > 0;
+        i--
+    ) {
+
+        const j =
+            Math.floor(
+                Math.random() *
+                (i + 1)
+            );
+
+
+        [
+            array[i],
+            array[j]
+        ] = [
+            array[j],
+            array[i]
+        ];
+
+    }
+
+
+    return array;
+
+}
+
+
+/* ============================================================
+   SELECT WINNER
+============================================================ */
+
+function selectWinner(
+    round,
+    matchIndex,
+    teamId
+) {
+
+    let match;
+
+
+    if (
+        round === "quarter"
+    ) {
+
+        match =
+            knockout
+                .quarterFinals[
+                    matchIndex
+                ];
+
+    }
+
+    else if (
+        round === "semi"
+    ) {
+
+        match =
+            knockout
+                .semiFinals[
+                    matchIndex
+                ];
+
+    }
+
+    else {
+
+        match =
+            knockout.final;
+
+    }
+
+
+    if (!match) {
+
+        return;
+
+    }
+
+
+    if (
+        match.winner
+    ) {
+
+        return;
+
+    }
+
+
+    const winner =
+        findTeam(teamId);
+
+
+    if (!winner) {
+
+        return;
+
+    }
+
+
+    match.winner =
+        winner;
+
+
+    /* =========================
+       QUARTER FINALS
+    ========================= */
+
+    if (
+        round === "quarter"
+    ) {
+
+        if (
+            matchIndex === 0
+        ) {
+
+            knockout
+                .semiFinals[0]
+                .team1 = winner;
+
+        }
+
+        else if (
+            matchIndex === 1
+        ) {
+
+            knockout
+                .semiFinals[0]
+                .team2 = winner;
+
+        }
+
+        else if (
+            matchIndex === 2
+        ) {
+
+            knockout
+                .semiFinals[1]
+                .team1 = winner;
+
+        }
+
+        else if (
+            matchIndex === 3
+        ) {
+
+            knockout
+                .semiFinals[1]
+                .team2 = winner;
+
+        }
+
+    }
+
+
+    /* =========================
+       SEMI FINALS
+    ========================= */
+
+    if (
+        round === "semi"
+    ) {
+
+        if (
+            matchIndex === 0
+        ) {
+
+            knockout.final.team1 =
+                winner;
+
+        }
+
+        else {
+
+            knockout.final.team2 =
+                winner;
+
+        }
+
+    }
+
+
+    /* =========================
+       FINAL
+    ========================= */
+
+    if (
+        round === "final"
+    ) {
+
+        knockout.champion =
+            winner;
+
+
+        document.getElementById(
+            "knockoutStatus"
+        ).innerText =
+            "🏆 Tournament complete!";
+
+    }
+
+
+    saveToStorage();
+
+    renderKnockout();
+
+}
+
+
+/* ============================================================
+   RENDER KNOCKOUT
+============================================================ */
+
+function renderKnockout() {
+
+    renderRound(
+        document.getElementById(
+            "quarterFinals"
+        ),
+
+        knockout.quarterFinals,
+
+        "quarter"
+    );
+
+
+    renderRound(
+        document.getElementById(
+            "semiFinals"
+        ),
+
+        knockout.semiFinals,
+
+        "semi"
+    );
+
+
+    renderRound(
+        document.getElementById(
+            "finalRound"
+        ),
+
+        knockout.final
+            ? [knockout.final]
+            : [],
+
+        "final"
+    );
+
+
+    const championArea =
+        document.getElementById(
+            "championArea"
+        );
+
+
+    if (
+        knockout.champion
+    ) {
+
+        championArea.innerHTML = `
+
+            <div class="champion">
+
+                <div class="trophy">
+                    🏆
+                </div>
+
+                <h2>
+                    TOURNAMENT CHAMPION
+                </h2>
+
+                <div class="champion-name">
+                    ${escapeHTML(
+                        knockout
+                            .champion
+                            .name
+                    )}
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+    else {
+
+        championArea.innerHTML = "";
+
+    }
+
+}
+
+
+/* ============================================================
+   RENDER ROUND
+============================================================ */
+
+function renderRound(
+    container,
+    matches,
+    round
+) {
+
+    container.innerHTML = "";
+
+
+    if (
+        !matches ||
+        matches.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    matches.forEach(
+        (match, index) => {
+
+            const wrapper =
+                document.createElement(
+                    "div"
+                );
+
+
+            wrapper.className =
+                "knockout-match";
+
+
+            if (
+                round === "final"
+            ) {
+
+                wrapper.classList.add(
+                    "final"
+                );
+
+            }
+
+
+            wrapper.innerHTML = `
+
+                ${createKnockoutTeam(
+                    match.team1,
+                    match.winner,
+                    round,
+                    index
+                )}
+
+                ${createKnockoutTeam(
+                    match.team2,
+                    match.winner,
+                    round,
+                    index
+                )}
+
+            `;
+
+
+            container.appendChild(
+                wrapper
+            );
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   KNOCKOUT TEAM
+============================================================ */
+
+function createKnockoutTeam(
+    team,
+    winner,
+    round,
+    index
+) {
+
+    if (!team) {
+
+        return `
+            <div class="knockout-team">
+
+                <span class="empty-team">
+                    Waiting...
+                </span>
+
+            </div>
+        `;
+
+    }
+
+
+    const isWinner =
+        winner &&
+        winner.id === team.id;
+
+
+    const isLoser =
+        winner &&
+        winner.id !== team.id;
+
+
+    return `
+
+        <div class="
+            knockout-team
+            ${isWinner ? "winner" : ""}
+            ${isLoser ? "loser" : ""}
+        ">
+
+            <span>
+
+                ${
+                    isWinner
+                        ? "✓ "
+                        : ""
+                }
+
+                ${escapeHTML(
+                    team.name
+                )}
+
+            </span>
+
+
+            <button
+
+                onclick="
+                    selectWinner(
+                        '${round}',
+                        ${index},
+                        ${team.id}
+                    )
+                "
+
+                ${winner
+                    ? "disabled"
+                    : ""
+                }
+
+            >
+
+                ${
+                    winner
+                        ? "Selected"
+                        : "WIN"
+                }
+
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+/* ============================================================
+   EXPORT TOURNAMENT
+============================================================ */
+
+function exportTournament() {
+
+    const data = {
+
+        version: 1,
+
+        exportedAt:
+            new Date().toISOString(),
+
+        teams: teams,
+
+        groupMatches:
+            groupMatches,
+
+        knockout:
+            knockout
+
+    };
+
+
+    const json =
+        JSON.stringify(
+            data,
+            null,
+            2
+        );
+
+
+    const blob =
+        new Blob(
+            [json],
+            {
+                type:
+                    "application/json"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    const date =
+        new Date()
+            .toISOString()
+            .slice(0, 10);
+
+
+    link.href = url;
+
+    link.download =
+        `soccer-tournament-${date}.json`;
+
+
+    document.body.appendChild(
+        link
+    );
+
+
+    link.click();
+
+
+    document.body.removeChild(
+        link
+    );
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+}
+
+
+/* ============================================================
+   IMPORT TOURNAMENT
+============================================================ */
+
+function importTournament(event) {
+
+    const file =
+        event.target.files[0];
+
+
+    if (!file) {
+
+        return;
+
+    }
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+        function(e) {
+
+            try {
+
+                const data =
+                    JSON.parse(
+                        e.target.result
+                    );
+
+
+                if (
+                    !data.teams ||
+                    !Array.isArray(
+                        data.teams
+                    )
+                ) {
+
+                    throw new Error(
+                        "Invalid tournament file."
+                    );
+
+                }
+
+
+                const confirmed =
+                    confirm(
+                        "Importing this file will replace the current tournament. Continue?"
+                    );
+
+
+                if (!confirmed) {
+
+                    return;
+
+                }
+
+
+                teams =
+                    data.teams;
+
+
+                groupMatches =
+                    data.groupMatches || [];
+
+
+                knockout =
+                    data.knockout || {
+
+                        started: false,
+
+                        quarterFinals: [],
+
+                        semiFinals: [],
+
+                        final: null,
+
+                        champion: null
+
+                    };
+
+
+                saveToStorage();
+
+
+                createTeamInputs();
+
+                updateTeamSelectors();
+
+                renderStandings();
+
+                renderMatches();
+
+                renderKnockout();
+
+
+                alert(
+                    "Tournament imported successfully."
+                );
+
+
+            }
+
+            catch (error) {
+
+                alert(
+                    "Could not import the tournament file. Please make sure it is a valid tournament backup."
+                );
+
+                console.error(
+                    error
+                );
+
+            }
+
+        };
+
+
+    reader.readAsText(file);
+
+
+    event.target.value = "";
+
+}
+
+
+/* ============================================================
+   RESET TOURNAMENT
+============================================================ */
+
+function resetTournament() {
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to completely reset the tournament? This will erase all teams, matches, standings and knockout results."
+        );
+
+
+    if (!confirmed) {
+
+        return;
+
+    }
+
+
+    localStorage.removeItem(
+        STORAGE_KEY
+    );
+
+
+    createNewTournament();
+
+
+    createTeamInputs();
+
+    updateTeamSelectors();
+
+    renderStandings();
+
+    renderMatches();
+
+    renderKnockout();
+
+
+    document.getElementById(
+        "knockoutStatus"
+    ).innerText = "";
+
+
+    saveToStorage();
+
+
+    alert(
+        "Tournament has been completely reset."
+    );
+
+}
+
+
+/* ============================================================
+   FIND TEAM
+============================================================ */
+
+function findTeam(id) {
+
+    return teams.find(
+        team =>
+            Number(team.id) ===
+            Number(id)
+    );
+
+}
+
+
+/* ============================================================
+   ESCAPE HTML
+============================================================ */
+
+function escapeHTML(value) {
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* ============================================================
+   START APPLICATION
+============================================================ */
+
+initialize();
+
+</script>
+
+</body>
+</html>
